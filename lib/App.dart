@@ -14,7 +14,7 @@ class AppState extends State<App> {
     return MaterialApp(
       home: Home(),
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primaryColor: Colors.white,
       ),
     );
   }
