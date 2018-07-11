@@ -15,12 +15,12 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
     super.initState();
 
     catController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 50),
       vsync: this,
     );
 
     catAnimation = Tween(
-      begin: 0.0,
+      begin: -83.0,
       end: 100.0,
     ).animate(
       CurvedAnimation(
@@ -39,7 +39,15 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       ),
       drawer: Drawer(),
       body: GestureDetector(
-        child: buildAnimation(),
+        child: Center(
+          child: Stack(
+            overflow: Overflow.visible,
+            children: <Widget>[
+              buildCatAnimation(),
+              buildBox(),
+            ],
+          ),
+        ),
         onTap: onTap,
       ),
     );
@@ -51,16 +59,26 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
         : catController.forward();
   }
 
-  Widget buildAnimation() {
+  Widget buildCatAnimation() {
     return AnimatedBuilder(
       animation: catAnimation,
       builder: (context, child) {
-        return Container(
+        return Positioned(
           child: child,
-          margin: EdgeInsets.only(top: catAnimation.value),
+          top: catAnimation.value,
+          right: 0.0,
+          left: 0.0,
         );
       },
       child: Cat(),
+    );
+  }
+
+  Widget buildBox() {
+    return Container(
+      height: 200.0,
+      width: 200.0,
+      color: Colors.brown,
     );
   }
 }
