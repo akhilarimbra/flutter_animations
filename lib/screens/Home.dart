@@ -54,13 +54,18 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
         boxController.forward();
       }
     });
+
     boxController.forward();
   }
 
   onTap() {
-    catController.isCompleted
-        ? catController.reverse()
-        : catController.forward();
+    if (catController.isCompleted) {
+      catController.reverse();
+      boxController.forward();
+    } else {
+      catController.forward();
+      boxController.stop();
+    }
   }
 
   @override
